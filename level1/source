@@ -1,0 +1,19 @@
+// Important parts only
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int run(void)
+{
+  puts("Good... Wait what?");
+  system("/bin/sh");         // Opens shell
+}
+
+
+int main(int argc, const char **argv, const char **envp)
+{
+  char s[64];
+
+  return (gets(s));   // Vulnerable: no bounds check = buffer overflow
+}
+
