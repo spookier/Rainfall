@@ -1,0 +1,17 @@
+void p(void)
+{
+    char buffer[76];
+    unsigned int addr;
+
+    fflush(stdout);
+    gets(buffer);
+
+    if ((addr & 0xB0000000) == 0xB0000000)
+    {
+        printf("(%p)\n", (void *)addr);
+        _exit(1);
+    }
+
+    puts(buffer);
+    strdup(buffer);
+}
