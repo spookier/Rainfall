@@ -1,0 +1,28 @@
+int main(int argc, char **argv)
+{
+    char *buffer = malloc(64);
+    void (**function_ptr)() = malloc(4);
+
+    *function_ptr = m;
+    
+    strcpy(buffer, argv[1]);
+
+    (*function_ptr)();
+    
+    return 0;
+}
+
+- - - - - -
+
+void m(void)
+{
+  puts("Nope");
+}
+
+- - - - - -
+
+void n(void)
+{
+  system("/bin/cat /home/user/level7/.pass");
+  return;
+}
