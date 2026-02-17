@@ -1,0 +1,53 @@
+// Global buffer where the password is stored ?
+char password_buffer[68]; 
+
+struct Node
+{
+    int id;
+    char *name;
+};
+
+int main(int argc, char **argv)
+{
+    struct Node *node_a;
+    struct Node *node_b;
+    FILE *fp;
+
+    if (argc < 3)
+    {
+        return 1;
+    }
+
+    // Allocate first node
+    node_a = malloc(sizeof(struct Node)); // malloc(8)
+    node_a->id = 1;
+    node_a->name = malloc(8);
+
+    // Allocate second node
+    node_b = malloc(sizeof(struct Node)); // malloc(8)
+    node_b->id = 2;
+    node_b->name = malloc(8);
+
+
+    strcpy(node_a->name, argv[1]);
+    strcpy(node_b->name, argv[2]);
+
+
+    fp = fopen("/home/user/level8/.pass", "r");
+    if (fp != NULL)
+    {
+        fgets(password_buffer, 0x44, fp);
+        fclose(fp);
+    }
+
+    puts("~~");
+    return 0;
+}
+
+
+void m(void *p1, int p2, char *p3, int p4, int p5)
+{
+    time_t now;
+    now = time(NULL);
+    printf("%s - %ld\n", password_buffer, now);
+}
