@@ -1,0 +1,40 @@
+#include <cstdlib>
+#include <cstring>
+#include <unistd.h>
+
+class N
+{
+private:
+    char annotation[100];
+    int value;
+
+public:
+    N(int number) : value(number) {}
+
+    void setAnnotation(char *text)
+    {
+        memcpy(annotation, text, strlen(text));
+    }
+
+    virtual int operator+(N &other)
+    {
+        return value + other.value;
+    }
+
+    virtual int operator-(N &other)
+    {
+        return value - other.value;
+    }
+};
+
+int main(int argc, char **argv)
+{
+    if (argc <= 1)
+        _exit(1);
+
+    N *first = new N(5);
+    N *second = new N(6);
+
+    first->setAnnotation(argv[1]);
+    return *second + *first;
+}
