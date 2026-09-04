@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+char *auth;
+char *service;
+
+int main(void)
+{
+    char buffer[128];
+
+    while (1)
+    {
+        printf("%p, %p \n", (void *)auth, (void *)service);
+
+        if (fgets(buffer, sizeof(buffer), stdin) == NULL)
+            break;
+
+        if (memcmp(buffer, "auth ", 5) == 0)
+        {
+            auth = malloc(4);
+            *(int *)auth = 0;
+            if (strlen(buffer + 5) <= 30)
+                strcpy(auth, buffer + 5);
+        }
+
+        if (memcmp(buffer, "reset", 5) == 0)
+            free(auth);
+
+        if (memcmp(buffer, "service", 6) == 0)
+            service = strdup(buffer + 7);
+
+        if (memcmp(buffer, "login", 5) == 0)
+        {
+            if (*(int *)(auth + 32) != 0)
+                system("/bin/sh");
+            else
+                fwrite("Password:\n", 1, 10, stdout);
+        }
+    }
+
+    return 0;
+}
